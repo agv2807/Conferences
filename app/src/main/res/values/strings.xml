@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Conferences</string>
+    <string name="conferences">Конференции</string>
+    <string name="online">Онлайн</string>
 </resources>

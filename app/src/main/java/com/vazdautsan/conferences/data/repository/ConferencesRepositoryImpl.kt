@@ -1,5 +1,6 @@
 package com.vazdautsan.conferences.data.repository
 
+import android.util.Log
 import com.vazdautsan.conferences.data.rds.ConferencesRds
 import com.vazdautsan.conferences.data.utils.safeApiCall
 import com.vazdautsan.conferences.domain.model.base.successDataOrNull
@@ -22,7 +23,7 @@ class ConferencesRepositoryImpl(
                         page,
                         perPage
                     )
-                }.successDataOrNull()?.result?.mapNotNull { it.toDomain() } ?: emptyList()
+                }.also { Log.d("safmasfkmasf", "$it") }.successDataOrNull()?.result?.mapNotNull { it.toDomain() } ?: emptyList()
             }
         ).flow
     }
