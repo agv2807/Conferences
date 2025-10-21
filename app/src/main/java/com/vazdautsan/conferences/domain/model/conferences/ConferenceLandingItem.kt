@@ -5,13 +5,12 @@ data class ConferenceLandingItem(
     val city: String,
     val country: String,
     val endDate: String,
-    val format: String,
+    val format: ConferenceFormat,
     val id: Int,
     val imageSrc: String?,
     val name: String,
     val startDate: String,
-    val status: String,
+    val status: ConferenceStatus,
     val statusTitle: String,
-    val type: String,
     val isNewMonth: Boolean
 )

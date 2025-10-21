@@ -1,6 +1,7 @@
 package com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
@@ -27,7 +28,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.vazdautsan.conferences.R
+import com.vazdautsan.conferences.domain.model.conferences.ConferenceFormat
 import com.vazdautsan.conferences.domain.model.conferences.ConferenceLandingItem
+import com.vazdautsan.conferences.domain.model.conferences.ConferenceStatus
 import com.vazdautsan.conferences.ui.theme.Colors
 
 @Composable
@@ -43,28 +46,34 @@ internal fun ConferenceListItem(
                 color = Colors.blackText,
                 fontWeight = FontWeight(600),
                 fontSize = 18.sp,
-                lineHeight = 32.sp
+                lineHeight = 25.2.sp
             )
         }
         Column(
             modifier = Modifier
                 .clip(RoundedCornerShape(16.dp))
-                .background(Colors.grayBg)
+                .background(conference.status.getBackground())
                 .padding(horizontal = 16.dp)
         ) {
+            if (conference.status == ConferenceStatus.CANCELED) {
+                Spacer(modifier = Modifier.height(10.dp))
+                CancelledBadge(text = conference.statusTitle)
+            }
             Spacer(modifier = Modifier.height(24.dp))
             Text(
                 text = conference.name,
                 color = Colors.buttonConf,
                 fontSize = 24.sp,
-                fontWeight = FontWeight(600)
+                fontWeight = FontWeight(600),
+                lineHeight = 28.8.sp
             )
             Spacer(modifier = Modifier.height(20.dp))
             ConferenceTime(
                 modifier = Modifier.fillMaxWidth(),
                 imageSrc = conference.imageSrc,
                 start = conference.startDate,
-                end = conference.endDate
+                end = conference.endDate,
+                status = conference.status
             )
             Spacer(modifier = Modifier.height(24.dp))
             ConferenceBadges(badges = conference.categories)
@@ -84,12 +93,13 @@ private fun ConferenceTime(
     modifier: Modifier = Modifier,
     imageSrc: String?,
     start: String,
-    end: String
+    end: String,
+    status: ConferenceStatus
 ) {
     Row(
         modifier = modifier
             .clip(RoundedCornerShape(16.dp))
-            .background(Colors.buttonArtConf.copy(alpha = 0.04f)),
+            .background(status.getTimeBackground()),
         verticalAlignment = Alignment.CenterVertically
     ) {
         AsyncImage(
@@ -111,13 +121,15 @@ private fun ConferenceTime(
                     text = "29",
                     color = Colors.blackText,
                     fontSize = 40.sp,
-                    fontWeight = FontWeight(300)
+                    fontWeight = FontWeight(300),
+                    lineHeight = 56.sp
                 )
                 Text(
                     text = "Jul",
                     color = Colors.blackText.copy(alpha = 0.6f),
                     fontSize = 12.sp,
-                    fontWeight = FontWeight(400)
+                    fontWeight = FontWeight(400),
+                    lineHeight = 16.8.sp
                 )
             }
             Text(
@@ -125,20 +137,23 @@ private fun ConferenceTime(
                 text = "-",
                 color = Colors.blackText,
                 fontSize = 40.sp,
-                fontWeight = FontWeight(300)
+                fontWeight = FontWeight(300),
+                lineHeight = 56.sp
             )
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
                     text = "29",
                     color = Colors.blackText,
                     fontSize = 40.sp,
-                    fontWeight = FontWeight(300)
+                    fontWeight = FontWeight(300),
+                    lineHeight = 56.sp
                 )
                 Text(
                     text = "Jul",
                     color = Colors.blackText.copy(alpha = 0.6f),
                     fontSize = 12.sp,
-                    fontWeight = FontWeight(400)
+                    fontWeight = FontWeight(400),
+                    lineHeight = 16.8.sp
                 )
             }
         }
@@ -163,7 +178,8 @@ private fun ConferenceBadges(
                 text = it,
                 color = Colors.buttonConf,
                 fontSize = 11.sp,
-                fontWeight = FontWeight(600)
+                fontWeight = FontWeight(600),
+                lineHeight = 15.4.sp
             )
         }
     }
@@ -172,18 +188,19 @@ private fun ConferenceBadges(
 @Composable
 private fun ConferencePosition(
     modifier: Modifier = Modifier,
-    format: String,
+    format: ConferenceFormat,
     city: String,
     country: String
 ) {
     Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
         Icon(
             imageVector = ImageVector.vectorResource(R.drawable.icon_octicon_location_16),
-            contentDescription = null
+            contentDescription = null,
+            tint = Colors.blackText
         )
         Spacer(modifier = Modifier.width(8.dp))
         Text(
-            text = if (format == "online") stringResource(R.string.online) else {
+            text = if (format == ConferenceFormat.ONLINE) stringResource(R.string.online) else {
                 buildString {
                     append(country)
                     append(", ")
@@ -192,7 +209,51 @@ private fun ConferencePosition(
             },
             color = Colors.buttonConf,
             fontWeight = FontWeight(400),
-            fontSize = 14.sp
+            fontSize = 14.sp,
+            lineHeight = 22.4.sp
         )
     }
+}
+
+@Composable
+private fun CancelledBadge(
+    modifier: Modifier = Modifier,
+    text: String
+) {
+    Row(
+        modifier = modifier
+            .border(
+                width = 1.dp,
+                color = Color.Red,
+                shape = RoundedCornerShape(16.dp)
+            )
+            .padding(horizontal = 10.dp, vertical = 4.5.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            imageVector = ImageVector.vectorResource(R.drawable.ph_lightning_bold),
+            contentDescription = null,
+            tint = Color.Red
+        )
+        Spacer(modifier = Modifier.width(2.dp))
+        Text(
+            text = text,
+            color = Color.Red,
+            fontWeight = FontWeight(600),
+            fontSize = 11.sp,
+            lineHeight = 15.4.sp
+        )
+    }
+}
+
+private fun ConferenceStatus.getBackground() = when (this) {
+    ConferenceStatus.PUBLISH -> Colors.grayBg
+    ConferenceStatus.CANCELED -> Color.Red.copy(alpha = 0.1f)
+    ConferenceStatus.UNCONFINED -> Colors.grayBg
+}
+
+private fun ConferenceStatus.getTimeBackground() = when (this) {
+    ConferenceStatus.PUBLISH -> Colors.buttonArtConf.copy(alpha = 0.04f)
+    ConferenceStatus.CANCELED -> Color.Red.copy(alpha = 0.06f)
+    ConferenceStatus.UNCONFINED -> Colors.buttonArtConf.copy(alpha = 0.04f)
 }

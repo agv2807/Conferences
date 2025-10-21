@@ -1,7 +1,11 @@
 package com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -14,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
@@ -65,7 +70,8 @@ internal fun ConferencesScreen(
                     }
                 }
             )
-        }
+        },
+        contentWindowInsets = WindowInsets()
     ) {
         ConferencesContent(
             modifier = Modifier
@@ -83,9 +89,15 @@ private fun ConferencesContent(
     state: ConferencesState,
     onAction: (ConferencesAction) -> Unit
 ) {
+    val density = LocalDensity.current
     LazyColumn(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        contentPadding = PaddingValues(bottom = with(density) {
+            WindowInsets.navigationBars.getBottom(
+                density
+            ).toDp()
+        })
     ) {
         items(state.conferences.itemCount()) {
             val conference = state.conferences[it]

@@ -1,7 +1,9 @@
 package com.vazdautsan.conferences.data.dto
 
 import com.google.gson.annotations.SerializedName
+import com.vazdautsan.conferences.domain.model.conferences.ConferenceFormat
 import com.vazdautsan.conferences.domain.model.conferences.ConferenceLandingItem
+import com.vazdautsan.conferences.domain.model.conferences.ConferenceStatus
 
 data class ConferenceLandingItemDto(
     @SerializedName("view_type")
@@ -15,9 +17,9 @@ data class ConferenceLandingItemDto(
         @SerializedName("name")
         val name: String?,
         @SerializedName("format")
-        val format: String?,
+        val format: ConferenceFormatDto?,
         @SerializedName("status")
-        val status: String?,
+        val status: ConferenceStatusDto?,
         @SerializedName("status_title")
         val statusTitle: String?,
         @SerializedName("url")
@@ -87,14 +89,13 @@ data class ConferenceLandingItemDto(
             city = city ?: "",
             country = country ?: "",
             endDate = endDate ?: "",
-            format = format ?: "",
+            format = format?.toDomain() ?: ConferenceFormat.UNCONFINED,
             id = id ?: return@run null,
             imageSrc = image?.url,
             name = name ?: "",
             startDate = startDate ?: "",
-            status = status ?: "",
+            status = status?.toDomain() ?: ConferenceStatus.UNCONFINED,
             statusTitle = statusTitle ?: "",
-            type = type?.name ?: "",
             isNewMonth = false
         )
     }
