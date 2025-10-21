@@ -1,9 +1,11 @@
 package com.vazdautsan.conferences.data.repository
 
-import android.util.Log
 import com.vazdautsan.conferences.data.rds.ConferencesRds
 import com.vazdautsan.conferences.data.utils.safeApiCall
+import com.vazdautsan.conferences.domain.model.base.Result
+import com.vazdautsan.conferences.domain.model.base.mapResult
 import com.vazdautsan.conferences.domain.model.base.successDataOrNull
+import com.vazdautsan.conferences.domain.model.conferences.ConferenceDetailed
 import com.vazdautsan.conferences.domain.model.conferences.ConferenceLandingItem
 import com.vazdautsan.conferences.domain.paging.Pager
 import com.vazdautsan.conferences.domain.paging.PagerConfig
@@ -23,8 +25,12 @@ class ConferencesRepositoryImpl(
                         page,
                         perPage
                     )
-                }.also { Log.d("safmasfkmasf", "$it") }.successDataOrNull()?.result?.mapNotNull { it.toDomain() } ?: emptyList()
+                }.successDataOrNull()?.result?.mapNotNull { it.toDomain() } ?: emptyList()
             }
         ).flow
+    }
+
+    override suspend fun getConferenceDetailed(id: Int): Result<ConferenceDetailed> {
+        return safeApiCall { conferencesRds.getConference(id) }.mapResult { it.toDomain() }
     }
 }

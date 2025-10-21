@@ -18,6 +18,7 @@ import com.vazdautsan.conferences.features.conferenses.presentation.conference_s
 import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.utils.ConferenceNavAction
 import kotlinx.serialization.Serializable
 import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 import org.orbitmvi.orbit.compose.collectAsState
 
 @Serializable
@@ -27,7 +28,8 @@ data class ConferenceDestination(val id: Int)
 @Composable
 fun ConferenceScreen(
     modifier: Modifier = Modifier,
-    viewModel: ConferenceViewModel = koinViewModel(),
+    conferenceId: Int,
+    viewModel: ConferenceViewModel = koinViewModel(parameters = { parametersOf(conferenceId) }),
     onNavAction: (ConferenceNavAction) -> Unit
 ) {
     val state by viewModel.collectAsState()
@@ -54,7 +56,9 @@ fun ConferenceScreen(
         ConferenceContent(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(it)
+                .padding(it),
+            state = state,
+            onAction = viewModel::dispatch
         )
     }
 }
@@ -62,6 +66,7 @@ fun ConferenceScreen(
 @Composable
 private fun ConferenceContent(
     modifier: Modifier = Modifier,
+    state: ConferenceState,
+    onAction: (ConferenceAction) -> Unit
 ) {
-
 }

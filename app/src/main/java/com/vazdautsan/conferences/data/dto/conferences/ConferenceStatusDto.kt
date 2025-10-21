@@ -1,4 +1,4 @@
-package com.vazdautsan.conferences.data.dto
+package com.vazdautsan.conferences.data.dto.conferences
 
 import com.google.gson.annotations.SerializedName
 import com.vazdautsan.conferences.domain.model.conferences.ConferenceStatus

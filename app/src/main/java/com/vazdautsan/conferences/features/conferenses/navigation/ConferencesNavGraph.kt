@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import androidx.navigation.toRoute
 import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.ConferenceDestination
 import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.ConferenceScreen
 import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.utils.ConferenceNavAction
@@ -45,7 +46,8 @@ internal fun NavGraphBuilder.conferencesNavGraph(
                             navController.navigateUp()
                         }
                     }
-                }
+                },
+                conferenceId = it.toRoute<ConferenceDestination>().id
             )
         }
     }
