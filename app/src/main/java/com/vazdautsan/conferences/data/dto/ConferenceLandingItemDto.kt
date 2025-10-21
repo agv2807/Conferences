@@ -1,9 +1,12 @@
 package com.vazdautsan.conferences.data.dto
 
 import com.google.gson.annotations.SerializedName
+import com.vazdautsan.conferences.domain.model.conferences.ConferenceDate
 import com.vazdautsan.conferences.domain.model.conferences.ConferenceFormat
 import com.vazdautsan.conferences.domain.model.conferences.ConferenceLandingItem
 import com.vazdautsan.conferences.domain.model.conferences.ConferenceStatus
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 data class ConferenceLandingItemDto(
     @SerializedName("view_type")
@@ -88,15 +91,31 @@ data class ConferenceLandingItemDto(
             categories = categories?.mapNotNull { it?.name } ?: emptyList(),
             city = city ?: "",
             country = country ?: "",
-            endDate = endDate ?: "",
+            endDate = createConferenceDate(endDate),
             format = format?.toDomain() ?: ConferenceFormat.UNCONFINED,
             id = id ?: return@run null,
             imageSrc = image?.url,
             name = name ?: "",
-            startDate = startDate ?: "",
+            startDate = createConferenceDate(startDate),
             status = status?.toDomain() ?: ConferenceStatus.UNCONFINED,
             statusTitle = statusTitle ?: "",
             isNewMonth = false
         )
+    }
+
+    fun createConferenceDate(inputDate: String?): ConferenceDate {
+        if (inputDate.isNullOrEmpty()) return ConferenceDate.empty()
+        return try {
+            val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val date = formatter.parse(inputDate)
+            ConferenceDate(
+                day = SimpleDateFormat("dd", Locale.getDefault()).format(date),
+                monthShort = SimpleDateFormat("MMM", Locale.ENGLISH).format(date).uppercase(),
+                monthYear = "",
+                date = inputDate
+            )
+        } catch (_: Throwable) {
+            ConferenceDate.empty()
+        }
     }
 }

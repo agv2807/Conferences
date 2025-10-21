@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.vazdautsan.conferences.R
+import com.vazdautsan.conferences.domain.model.conferences.ConferenceDate
 import com.vazdautsan.conferences.domain.model.conferences.ConferenceFormat
 import com.vazdautsan.conferences.domain.model.conferences.ConferenceLandingItem
 import com.vazdautsan.conferences.domain.model.conferences.ConferenceStatus
@@ -42,7 +43,7 @@ internal fun ConferenceListItem(
         if (conference.isNewMonth) {
             Text(
                 modifier = Modifier.padding(bottom = 24.dp, start = 16.dp),
-                text = "New Month",
+                text = conference.startDate.monthYear,
                 color = Colors.blackText,
                 fontWeight = FontWeight(600),
                 fontSize = 18.sp,
@@ -92,8 +93,8 @@ internal fun ConferenceListItem(
 private fun ConferenceTime(
     modifier: Modifier = Modifier,
     imageSrc: String?,
-    start: String,
-    end: String,
+    start: ConferenceDate,
+    end: ConferenceDate,
     status: ConferenceStatus
 ) {
     Row(
@@ -118,14 +119,14 @@ private fun ConferenceTime(
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
-                    text = "29",
+                    text = start.day,
                     color = Colors.blackText,
                     fontSize = 40.sp,
                     fontWeight = FontWeight(300),
                     lineHeight = 56.sp
                 )
                 Text(
-                    text = "Jul",
+                    text = start.monthShort,
                     color = Colors.blackText.copy(alpha = 0.6f),
                     fontSize = 12.sp,
                     fontWeight = FontWeight(400),
@@ -142,14 +143,14 @@ private fun ConferenceTime(
             )
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
-                    text = "29",
+                    text = end.day,
                     color = Colors.blackText,
                     fontSize = 40.sp,
                     fontWeight = FontWeight(300),
                     lineHeight = 56.sp
                 )
                 Text(
-                    text = "Jul",
+                    text = end.monthShort,
                     color = Colors.blackText.copy(alpha = 0.6f),
                     fontSize = 12.sp,
                     fontWeight = FontWeight(400),
