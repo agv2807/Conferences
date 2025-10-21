@@ -50,4 +50,5 @@ dependencies {
     implementation(libs.bundles.koin)
     implementation(libs.bundles.orbit)
     implementation(libs.bundles.navigation)
+    implementation(libs.retrofit.gson)
 }

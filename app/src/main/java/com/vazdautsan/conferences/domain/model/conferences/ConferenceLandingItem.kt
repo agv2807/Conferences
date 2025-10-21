@@ -7,7 +7,7 @@ data class ConferenceLandingItem(
     val endDate: String,
     val format: String,
     val id: Int,
-    val imageSrc: String,
+    val imageSrc: String?,
     val name: String,
     val startDate: String,
     val status: String,
