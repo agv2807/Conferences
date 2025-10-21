@@ -7,6 +7,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.ConferenceDestination
+import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.ConferenceScreen
+import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.utils.ConferenceNavAction
 import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.ConferencesDestination
 import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.ConferencesScreen
 import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.utils.ConferencesNavAction
@@ -35,7 +37,16 @@ internal fun NavGraphBuilder.conferencesNavGraph(
         }
 
         composable<ConferenceDestination> {
-
+            ConferenceScreen(
+                modifier = Modifier.fillMaxSize(),
+                onNavAction = { action ->
+                    when (action) {
+                        ConferenceNavAction.Back -> {
+                            navController.navigateUp()
+                        }
+                    }
+                }
+            )
         }
     }
 }
