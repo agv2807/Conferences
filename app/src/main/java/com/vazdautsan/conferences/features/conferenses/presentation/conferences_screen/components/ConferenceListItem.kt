@@ -2,6 +2,7 @@ package com.vazdautsan.conferences.features.conferenses.presentation.conferences
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
@@ -37,7 +38,8 @@ import com.vazdautsan.conferences.ui.theme.Colors
 @Composable
 internal fun ConferenceListItem(
     modifier: Modifier = Modifier,
-    conference: ConferenceLandingItem
+    conference: ConferenceLandingItem,
+    onClick: () -> Unit
 ) {
     Column(modifier = modifier) {
         if (conference.isNewMonth) {
@@ -54,6 +56,7 @@ internal fun ConferenceListItem(
             modifier = Modifier
                 .clip(RoundedCornerShape(16.dp))
                 .background(conference.status.getBackground())
+                .clickable(onClick = onClick)
                 .padding(horizontal = 16.dp)
         ) {
             if (conference.status == ConferenceStatus.CANCELED) {

@@ -1,6 +1,7 @@
 package com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.utils
 
 import androidx.compose.runtime.Composable
+import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.ConferencesSideEffect
 import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.ConferencesViewModel
 import org.orbitmvi.orbit.compose.collectSideEffect
 
@@ -10,6 +11,10 @@ internal fun CollectSideEffect(
     onNavAction: (ConferencesNavAction) -> Unit
 ) {
     viewModel.collectSideEffect {
-
+        when (it) {
+            is ConferencesSideEffect.OpenConference -> {
+                onNavAction(ConferencesNavAction.Conference(it.id))
+            }
+        }
     }
 }

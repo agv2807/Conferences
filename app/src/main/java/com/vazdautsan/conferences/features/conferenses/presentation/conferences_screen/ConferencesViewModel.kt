@@ -15,12 +15,20 @@ class ConferencesViewModel(
     }
 
     fun dispatch(action: ConferencesAction) {
-
+        when (action) {
+            is ConferencesAction.ConferenceClick -> {
+                openConference(action.id)
+            }
+        }
     }
 
     private fun loadConferences() = intent {
         getPagingConferences().collect {
             reduce { state.copy(conferences = it) }
         }
+    }
+
+    private fun openConference(id: Int) = intent {
+        postSideEffect(ConferencesSideEffect.OpenConference(id))
     }
 }

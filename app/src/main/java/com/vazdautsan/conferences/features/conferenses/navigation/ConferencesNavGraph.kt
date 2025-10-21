@@ -6,8 +6,10 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.ConferenceDestination
 import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.ConferencesDestination
 import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.ConferencesScreen
+import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.utils.ConferencesNavAction
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -22,10 +24,18 @@ internal fun NavGraphBuilder.conferencesNavGraph(
         composable<ConferencesDestination> {
             ConferencesScreen(
                 modifier = Modifier.fillMaxSize(),
-                onNavAction = {
-
+                onNavAction = { action ->
+                    when (action) {
+                        is ConferencesNavAction.Conference -> {
+                            navController.navigate(ConferenceDestination(action.id))
+                        }
+                    }
                 }
             )
+        }
+
+        composable<ConferenceDestination> {
+
         }
     }
 }

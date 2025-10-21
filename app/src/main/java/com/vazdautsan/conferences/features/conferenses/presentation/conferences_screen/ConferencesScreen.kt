@@ -102,7 +102,8 @@ private fun ConferencesContent(
         items(state.conferences.itemCount()) {
             val conference = state.conferences[it]
             ConferenceListItem(
-                conference = conference
+                conference = conference,
+                onClick = { onAction(ConferencesAction.ConferenceClick(conference.id)) }
             )
         }
     }
