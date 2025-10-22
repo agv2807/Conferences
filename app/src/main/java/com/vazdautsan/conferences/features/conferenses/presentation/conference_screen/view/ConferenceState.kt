@@ -2,9 +2,9 @@ package com.vazdautsan.conferences.features.conferenses.presentation.conference_
 
 import androidx.compose.runtime.Immutable
 import com.vazdautsan.conferences.domain.model.base.Result
-import com.vazdautsan.conferences.domain.model.conferences.ConferenceDetailed
+import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.model.ConferenceDetailedUi
 
 @Immutable
 data class ConferenceState(
-    val conference: Result<ConferenceDetailed> = Result.Empty()
+    val conference: Result<ConferenceDetailedUi> = Result.Empty()
 )
