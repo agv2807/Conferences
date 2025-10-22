@@ -42,7 +42,7 @@ internal fun ConferenceListItem(
     Column(modifier = modifier) {
         if (conference.isNewMonth) {
             Text(
-                modifier = Modifier.padding(bottom = 24.dp, start = 16.dp),
+                modifier = Modifier.padding(bottom = 24.dp, start = 16.dp, top = 36.dp),
                 text = conference.startDate.monthYear,
                 color = Colors.blackText,
                 fontWeight = FontWeight(600),
