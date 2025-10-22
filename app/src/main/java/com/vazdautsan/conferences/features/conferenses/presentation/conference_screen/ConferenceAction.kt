@@ -2,4 +2,5 @@ package com.vazdautsan.conferences.features.conferenses.presentation.conference_
 
 sealed interface ConferenceAction {
     data object BackClick : ConferenceAction
+    data object RegistrationClick : ConferenceAction
 }

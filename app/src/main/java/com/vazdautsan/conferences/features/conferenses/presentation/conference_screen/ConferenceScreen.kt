@@ -113,7 +113,7 @@ private fun ConferenceContent(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
-                    onClick = {},
+                    onClick = { onAction(ConferenceAction.RegistrationClick) },
                     shape = RoundedCornerShape(16.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Colors.buttonArtConf,

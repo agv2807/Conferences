@@ -1,6 +1,7 @@
 package com.vazdautsan.conferences.features.conferenses.presentation.conference_screen
 
 import androidx.lifecycle.ViewModel
+import com.vazdautsan.conferences.domain.model.base.successDataOrNull
 import com.vazdautsan.conferences.domain.use_case.GetConferenceDetailed
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.viewmodel.container
@@ -21,6 +22,10 @@ class ConferenceViewModel(
             ConferenceAction.BackClick -> {
                 navigateBack()
             }
+
+            ConferenceAction.RegistrationClick -> {
+                openRegistration()
+            }
         }
     }
 
@@ -33,5 +38,10 @@ class ConferenceViewModel(
             val result = getConferenceDetailed(conferenceId)
             reduce { state.copy(conference = result) }
         }
+    }
+
+    private fun openRegistration() = intent {
+        val registerUrl = state.conference.successDataOrNull()?.registerUrl ?: return@intent
+        postSideEffect(ConferenceSideEffect.OpenRegistration(registerUrl))
     }
 }

@@ -2,4 +2,5 @@ package com.vazdautsan.conferences.features.conferenses.presentation.conference_
 
 sealed interface ConferenceSideEffect {
     data object NavigateBack : ConferenceSideEffect
+    data class OpenRegistration(val url: String) : ConferenceSideEffect
 }
