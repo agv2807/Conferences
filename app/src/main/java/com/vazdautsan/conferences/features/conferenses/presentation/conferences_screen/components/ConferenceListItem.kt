@@ -22,7 +22,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -30,7 +29,6 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.vazdautsan.conferences.R
 import com.vazdautsan.conferences.domain.model.conferences.ConferenceDate
-import com.vazdautsan.conferences.domain.model.conferences.ConferenceFormat
 import com.vazdautsan.conferences.domain.model.conferences.ConferenceLandingItem
 import com.vazdautsan.conferences.domain.model.conferences.ConferenceStatus
 import com.vazdautsan.conferences.ui.theme.Colors
@@ -83,11 +81,7 @@ internal fun ConferenceListItem(
             Spacer(modifier = Modifier.height(24.dp))
             ConferenceBadges(badges = conference.categories)
             Spacer(modifier = Modifier.height(16.dp))
-            ConferencePosition(
-                format = conference.format,
-                city = conference.city,
-                country = conference.country
-            )
+            ConferencePosition(position = conference.position)
             Spacer(modifier = Modifier.height(24.dp))
         }
     }
@@ -196,9 +190,7 @@ private fun ConferenceBadges(
 @Composable
 private fun ConferencePosition(
     modifier: Modifier = Modifier,
-    format: ConferenceFormat,
-    city: String,
-    country: String
+    position: String
 ) {
     Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
         Icon(
@@ -208,13 +200,7 @@ private fun ConferencePosition(
         )
         Spacer(modifier = Modifier.width(8.dp))
         Text(
-            text = if (format == ConferenceFormat.ONLINE) stringResource(R.string.online) else {
-                buildString {
-                    append(country)
-                    append(", ")
-                    append(city)
-                }
-            },
+            text = position,
             color = Colors.buttonConf,
             fontWeight = FontWeight(400),
             fontSize = 14.sp,

@@ -2,6 +2,7 @@ package com.vazdautsan.conferences.data.dto.conferences
 
 import com.google.gson.annotations.SerializedName
 import com.vazdautsan.conferences.domain.model.conferences.ConferenceDetailed
+import com.vazdautsan.conferences.domain.model.conferences.ConferenceFormat
 
 data class ConferenceDetailedDto(
     @SerializedName("about")
@@ -54,9 +55,13 @@ data class ConferenceDetailedDto(
             imageUrl = image?.url ?: "",
             categories = categories?.mapNotNull { it?.name } ?: emptyList(),
             startDate = startDate ?: "",
-            position = city ?: "",
+            position = "",
             registerUrl = registerUrl ?: "",
-            description = about ?: ""
+            description = about ?: "",
+            endDate = endDate ?: "",
+            format = format?.toDomain() ?: ConferenceFormat.UNCONFINED,
+            city = city ?: "",
+            country = country ?: ""
         )
     }
 }

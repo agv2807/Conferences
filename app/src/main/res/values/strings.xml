@@ -18,4 +18,10 @@
     </string-array>
     <string name="registration">Регистрация</string>
     <string name="about_event">О событии</string>
+    <plurals name="days">
+        <item quantity="one">день</item>
+        <item quantity="few">дня</item>
+        <item quantity="many">дней</item>
+        <item quantity="other">дней</item>
+    </plurals>
 </resources>

@@ -6,7 +6,11 @@ data class ConferenceDetailed(
     val imageUrl: String?,
     val categories: List<String>,
     val startDate: String,
-    val position: String,
+    val city: String,
+    val country: String,
     val registerUrl: String,
-    val description: String
+    val description: String,
+    val endDate: String,
+    val format: ConferenceFormat,
+    val position: String
 )

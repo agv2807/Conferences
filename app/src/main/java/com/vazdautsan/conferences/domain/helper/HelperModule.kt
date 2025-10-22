@@ -8,4 +8,10 @@ val helperModule = module {
     factoryOf(::AndroidMonthNamesProvider) {
         bind<MonthNamesProvider>()
     }
+    factoryOf(::AndroidDaysPluralProvider) {
+        bind<DaysPluralProvider>()
+    }
+    factoryOf(::AndroidConferencePositionHelper) {
+        bind<ConferencePositionHelper>()
+    }
 }

@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.sp
 import com.vazdautsan.conferences.R
 import com.vazdautsan.conferences.domain.model.base.Result
 import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.components.ConferenceCategories
+import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.components.ConferenceDatePosition
 import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.components.ConferenceTitle
 import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.utils.CollectSideEffect
 import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.utils.ConferenceNavAction
@@ -107,6 +108,12 @@ private fun ConferenceContent(
                 ConferenceCategories(
                     modifier = Modifier.padding(horizontal = 16.dp),
                     categories = conference.categories
+                )
+                Spacer(modifier = Modifier.height(20.dp))
+                ConferenceDatePosition(
+                    modifier = Modifier.padding(horizontal = 16.dp),
+                    date = conference.startDate,
+                    position = conference.position
                 )
                 Spacer(modifier = Modifier.height(28.dp))
                 Button(

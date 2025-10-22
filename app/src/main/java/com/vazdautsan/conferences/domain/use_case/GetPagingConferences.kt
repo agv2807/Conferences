@@ -1,18 +1,22 @@
 package com.vazdautsan.conferences.domain.use_case
 
+import com.vazdautsan.conferences.domain.helper.ConferencePositionHelper
 import com.vazdautsan.conferences.domain.helper.MonthNamesProvider
 import com.vazdautsan.conferences.domain.model.conferences.ConferenceLandingItem
 import com.vazdautsan.conferences.domain.paging.PagingData
 import com.vazdautsan.conferences.domain.paging.mapPagingFlow
 import com.vazdautsan.conferences.domain.repository.ConferencesRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
 class GetPagingConferences(
     private val conferencesRepository: ConferencesRepository,
-    private val monthNamesProvider: MonthNamesProvider
+    private val monthNamesProvider: MonthNamesProvider,
+    private val conferencePositionHelper: ConferencePositionHelper
 ) {
     suspend fun execute(): Flow<PagingData<ConferenceLandingItem>> {
         var previousMonth: Int? = null
@@ -22,6 +26,11 @@ class GetPagingConferences(
                 isNewMonth = currentMonth != previousMonth,
                 startDate = it.startDate.copy(
                     monthYear = createMonthYear(it.startDate.date)
+                ),
+                position = conferencePositionHelper.getPosition(
+                    format = it.format,
+                    city = it.city,
+                    country = it.country
                 )
             ).also {
                 previousMonth = currentMonth
@@ -29,7 +38,7 @@ class GetPagingConferences(
         }
     }
 
-    suspend operator fun invoke() = execute()
+    suspend operator fun invoke() = withContext(Dispatchers.Default) { execute() }
 
     private fun parseYearMonth(dateString: String): Int? {
         return try {
@@ -49,7 +58,7 @@ class GetPagingConferences(
         val months = monthNamesProvider.getMonthsArray()
         val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         return try {
-            val date = formatter.parse(inputDate)
+            val date = formatter.parse(inputDate) ?: return ""
             val calendar = Calendar.getInstance()
             calendar.time = date
             val month = calendar.get(Calendar.MONTH)
