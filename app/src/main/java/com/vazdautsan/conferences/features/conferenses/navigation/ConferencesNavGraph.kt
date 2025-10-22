@@ -10,8 +10,8 @@ import androidx.navigation.toRoute
 import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.ConferenceDestination
 import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.ConferenceScreen
 import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.utils.ConferenceNavAction
-import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.ConferencesDestination
-import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.ConferencesScreen
+import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.view.ConferencesDestination
+import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.view.ConferencesScreen
 import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.utils.ConferencesNavAction
 import kotlinx.serialization.Serializable
 

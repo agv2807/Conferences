@@ -1,4 +1,4 @@
-package com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.components
+package com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.view.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -31,19 +31,21 @@ import com.vazdautsan.conferences.R
 import com.vazdautsan.conferences.domain.model.conferences.ConferenceDate
 import com.vazdautsan.conferences.domain.model.conferences.ConferenceLandingItem
 import com.vazdautsan.conferences.domain.model.conferences.ConferenceStatus
+import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.model.ConferenceDateUi
+import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.model.ConferenceLandingItemUi
 import com.vazdautsan.conferences.ui.theme.Colors
 
 @Composable
 internal fun ConferenceListItem(
     modifier: Modifier = Modifier,
-    conference: ConferenceLandingItem,
+    conference: ConferenceLandingItemUi,
     onClick: () -> Unit
 ) {
     Column(modifier = modifier) {
         if (conference.isNewMonth) {
             Text(
                 modifier = Modifier.padding(bottom = 24.dp, start = 16.dp, top = 36.dp),
-                text = conference.startDate.monthYear,
+                text = conference.monthYear,
                 color = Colors.blackText,
                 fontWeight = FontWeight(600),
                 fontSize = 18.sp,
@@ -91,8 +93,8 @@ internal fun ConferenceListItem(
 private fun ConferenceTime(
     modifier: Modifier = Modifier,
     imageSrc: String?,
-    start: ConferenceDate,
-    end: ConferenceDate,
+    start: ConferenceDateUi,
+    end: ConferenceDateUi,
     status: ConferenceStatus,
     isOneDay: Boolean
 ) {

@@ -1,4 +1,4 @@
-package com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen
+package com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -22,7 +22,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.vazdautsan.conferences.R
-import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.components.ConferenceListItem
+import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.intent.ConferencesAction
+import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.intent.ConferencesViewModel
+import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.view.components.ConferenceListItem
 import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.utils.CollectSideEffect
 import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.utils.ConferencesNavAction
 import kotlinx.serialization.Serializable
