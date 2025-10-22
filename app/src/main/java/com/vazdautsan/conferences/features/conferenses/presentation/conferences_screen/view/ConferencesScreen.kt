@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -22,11 +23,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.vazdautsan.conferences.R
+import com.vazdautsan.conferences.domain.model.base.Result
 import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.intent.ConferencesAction
 import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.intent.ConferencesViewModel
-import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.view.components.ConferenceListItem
 import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.utils.CollectSideEffect
 import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.utils.ConferencesNavAction
+import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.view.components.ConferenceListItem
 import kotlinx.serialization.Serializable
 import org.koin.androidx.compose.koinViewModel
 import org.orbitmvi.orbit.compose.collectAsState
@@ -100,12 +102,17 @@ private fun ConferencesContent(
             ).toDp()
         })
     ) {
-        items(state.conferences.itemCount()) {
-            val conference = state.conferences[it]
-            ConferenceListItem(
-                conference = conference,
-                onClick = { onAction(ConferencesAction.ConferenceClick(conference.id)) }
-            )
+        when (state.conferences) {
+            is Result.Success -> {
+                items(state.conferences.data, key = { it.id }) { conference ->
+                    ConferenceListItem(
+                        conference = conference,
+                        onClick = { onAction(ConferencesAction.ConferenceClick(conference.id)) }
+                    )
+                }
+            }
+
+            else -> Unit
         }
     }
 }

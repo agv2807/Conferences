@@ -2,8 +2,8 @@ package com.vazdautsan.conferences.features.conferenses.presentation.conference_
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalUriHandler
-import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.ConferenceSideEffect
-import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.ConferenceViewModel
+import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.intent.ConferenceSideEffect
+import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.intent.ConferenceViewModel
 import org.orbitmvi.orbit.compose.collectSideEffect
 
 @Composable

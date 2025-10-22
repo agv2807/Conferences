@@ -7,11 +7,8 @@ import com.vazdautsan.conferences.data.rds.ConferencesRds
 import com.vazdautsan.conferences.network.api.ConferencesApi
 
 class ConferencesRdsImpl(private val conferencesApi: ConferencesApi) : ConferencesRds {
-    override suspend fun getConferences(
-        page: Int,
-        perPage: Int
-    ): ServerResponse<ConferencesResultDto> {
-        return conferencesApi.getConferences(page, perPage)
+    override suspend fun getConferences(): ServerResponse<ConferencesResultDto> {
+        return conferencesApi.getConferences()
     }
 
     override suspend fun getConference(id: Int): ServerResponse<ConferenceDetailedDto> {

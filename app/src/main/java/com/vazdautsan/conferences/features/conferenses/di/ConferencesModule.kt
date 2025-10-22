@@ -1,6 +1,6 @@
 package com.vazdautsan.conferences.features.conferenses.di
 
-import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.ConferenceViewModel
+import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.intent.ConferenceViewModel
 import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.intent.ConferencesViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf

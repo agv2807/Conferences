@@ -1,6 +1,5 @@
-package com.vazdautsan.conferences.features.conferenses.presentation.conference_screen
+package com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.view
 
-import android.text.Html
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -32,9 +31,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.vazdautsan.conferences.R
 import com.vazdautsan.conferences.domain.model.base.Result
-import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.components.ConferenceCategories
-import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.components.ConferenceDatePosition
-import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.components.ConferenceTitle
+import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.intent.ConferenceAction
+import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.intent.ConferenceViewModel
+import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.view.components.ConferenceCategories
+import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.view.components.ConferenceDatePosition
+import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.view.components.ConferenceTitle
 import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.utils.CollectSideEffect
 import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.utils.ConferenceNavAction
 import com.vazdautsan.conferences.ui.theme.Colors

@@ -1,4 +1,4 @@
-package com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.components
+package com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.view.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

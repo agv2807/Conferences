@@ -1,8 +1,9 @@
-package com.vazdautsan.conferences.features.conferenses.presentation.conference_screen
+package com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.intent
 
 import androidx.lifecycle.ViewModel
 import com.vazdautsan.conferences.domain.model.base.successDataOrNull
 import com.vazdautsan.conferences.domain.use_case.GetConferenceDetailed
+import com.vazdautsan.conferences.features.conferenses.presentation.conference_screen.view.ConferenceState
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.viewmodel.container
 

@@ -2,38 +2,39 @@ package com.vazdautsan.conferences.domain.use_case
 
 import com.vazdautsan.conferences.domain.helper.ConferencePositionHelper
 import com.vazdautsan.conferences.domain.helper.MonthNamesProvider
+import com.vazdautsan.conferences.domain.model.base.Result
+import com.vazdautsan.conferences.domain.model.base.mapResult
 import com.vazdautsan.conferences.domain.model.conferences.ConferenceLandingItem
-import com.vazdautsan.conferences.domain.paging.PagingData
-import com.vazdautsan.conferences.domain.paging.mapPagingFlow
 import com.vazdautsan.conferences.domain.repository.ConferencesRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class GetPagingConferences(
+class GetConferences(
     private val conferencesRepository: ConferencesRepository,
     private val monthNamesProvider: MonthNamesProvider,
     private val conferencePositionHelper: ConferencePositionHelper
 ) {
-    suspend fun execute(): Flow<PagingData<ConferenceLandingItem>> {
+    suspend fun execute(): Result<List<ConferenceLandingItem>> {
         var previousMonth: Int? = null
-        return conferencesRepository.getConferences().mapPagingFlow {
-            val currentMonth = parseYearMonth(it.startDate.date)
-            it.copy(
-                isNewMonth = currentMonth != previousMonth,
-                startDate = it.startDate.copy(
-                    monthYear = createMonthYear(it.startDate.date)
-                ),
-                position = conferencePositionHelper.getPosition(
-                    format = it.format,
-                    city = it.city,
-                    country = it.country
-                )
-            ).also {
-                previousMonth = currentMonth
+        return conferencesRepository.getConferences().mapResult { result ->
+            result.map {
+                val currentMonth = parseYearMonth(it.startDate.date)
+                it.copy(
+                    isNewMonth = currentMonth != previousMonth,
+                    startDate = it.startDate.copy(
+                        monthYear = createMonthYear(it.startDate.date)
+                    ),
+                    position = conferencePositionHelper.getPosition(
+                        format = it.format,
+                        city = it.city,
+                        country = it.country
+                    )
+                ).also {
+                    previousMonth = currentMonth
+                }
             }
         }
     }

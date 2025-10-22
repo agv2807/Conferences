@@ -5,7 +5,7 @@ import com.vazdautsan.conferences.data.dto.conferences.ConferencesResultDto
 import com.vazdautsan.conferences.data.dto.server_response.ServerResponse
 
 interface ConferencesRds {
-    suspend fun getConferences(page: Int, perPage: Int): ServerResponse<ConferencesResultDto>
+    suspend fun getConferences(): ServerResponse<ConferencesResultDto>
 
     suspend fun getConference(id: Int): ServerResponse<ConferenceDetailedDto>
 }

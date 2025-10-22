@@ -1,15 +1,15 @@
 package com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.intent
 
 import androidx.lifecycle.ViewModel
-import com.vazdautsan.conferences.domain.paging.mapPaging
-import com.vazdautsan.conferences.domain.use_case.GetPagingConferences
+import com.vazdautsan.conferences.domain.model.base.mapResult
+import com.vazdautsan.conferences.domain.use_case.GetConferences
 import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.model.toUi
 import com.vazdautsan.conferences.features.conferenses.presentation.conferences_screen.view.ConferencesState
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.viewmodel.container
 
 class ConferencesViewModel(
-    private val getPagingConferences: GetPagingConferences
+    private val getPagingConferences: GetConferences
 ) : ViewModel(), ContainerHost<ConferencesState, ConferencesSideEffect> {
     override val container = container<ConferencesState, ConferencesSideEffect>(ConferencesState())
 
@@ -26,8 +26,9 @@ class ConferencesViewModel(
     }
 
     private fun loadConferences() = intent {
-        getPagingConferences().collect { conferences ->
-            reduce { state.copy(conferences = conferences.mapPaging { it.toUi() }) }
+        repeatOnSubscription {
+            val result = getPagingConferences().mapResult { result -> result.map { it.toUi() } }
+            reduce { state.copy(conferences = result) }
         }
     }
 
