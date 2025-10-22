@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">Conferences</string>
+    <string name="conferences">Конференции</string>
+    <string name="online">Онлайн</string>
+    <string-array name="months_array">
+        <item>Январь</item>
+        <item>Февраль</item>
+        <item>Март</item>
+        <item>Апрель</item>
+        <item>Май</item>
+        <item>Июнь</item>
+        <item>Июль</item>
+        <item>Август</item>
+        <item>Сентябрь</item>
+        <item>Октябрь</item>
+        <item>Ноябрь</item>
+        <item>Декабрь</item>
+    </string-array>
+    <string name="registration">Регистрация</string>
+    <string name="about_event">О событии</string>
+    <plurals name="days">
+        <item quantity="one">день</item>
+        <item quantity="few">дня</item>
+        <item quantity="many">дней</item>
+        <item quantity="other">дней</item>
+    </plurals>
 </resources>
