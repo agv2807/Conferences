@@ -12,7 +12,8 @@ data class ConferenceLandingItem(
     val startDate: ConferenceDate,
     val status: ConferenceStatus,
     val statusTitle: String,
-    val isNewMonth: Boolean
+    val isNewMonth: Boolean,
+    val isOneDay: Boolean
 )
 
 data class ConferenceDate(

@@ -99,7 +99,8 @@ data class ConferenceLandingItemDto(
             startDate = createConferenceDate(startDate),
             status = status?.toDomain() ?: ConferenceStatus.UNCONFINED,
             statusTitle = statusTitle ?: "",
-            isNewMonth = false
+            isNewMonth = false,
+            isOneDay = oneday == 1
         )
     }
 

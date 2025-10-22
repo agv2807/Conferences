@@ -77,7 +77,8 @@ internal fun ConferenceListItem(
                 imageSrc = conference.imageSrc,
                 start = conference.startDate,
                 end = conference.endDate,
-                status = conference.status
+                status = conference.status,
+                isOneDay = conference.isOneDay
             )
             Spacer(modifier = Modifier.height(24.dp))
             ConferenceBadges(badges = conference.categories)
@@ -98,7 +99,8 @@ private fun ConferenceTime(
     imageSrc: String?,
     start: ConferenceDate,
     end: ConferenceDate,
-    status: ConferenceStatus
+    status: ConferenceStatus,
+    isOneDay: Boolean
 ) {
     Row(
         modifier = modifier
@@ -136,29 +138,31 @@ private fun ConferenceTime(
                     lineHeight = 16.8.sp
                 )
             }
-            Text(
-                modifier = Modifier.padding(horizontal = 4.dp),
-                text = "-",
-                color = Colors.blackText,
-                fontSize = 40.sp,
-                fontWeight = FontWeight(300),
-                lineHeight = 56.sp
-            )
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            if (!isOneDay) {
                 Text(
-                    text = end.day,
+                    modifier = Modifier.padding(horizontal = 4.dp),
+                    text = "-",
                     color = Colors.blackText,
                     fontSize = 40.sp,
                     fontWeight = FontWeight(300),
                     lineHeight = 56.sp
                 )
-                Text(
-                    text = end.monthShort,
-                    color = Colors.blackText.copy(alpha = 0.6f),
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight(400),
-                    lineHeight = 16.8.sp
-                )
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        text = end.day,
+                        color = Colors.blackText,
+                        fontSize = 40.sp,
+                        fontWeight = FontWeight(300),
+                        lineHeight = 56.sp
+                    )
+                    Text(
+                        text = end.monthShort,
+                        color = Colors.blackText.copy(alpha = 0.6f),
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight(400),
+                        lineHeight = 16.8.sp
+                    )
+                }
             }
         }
     }
