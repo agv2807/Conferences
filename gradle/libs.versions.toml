@@ -11,6 +11,7 @@ koin = "4.1.1"
 coil = "2.7.0"
 retrofit = "3.0.0"
 orbit = "10.0.0"
+charlex = "1.6.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -30,6 +31,7 @@ retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", ver
 orbit-compose = { module = "org.orbit-mvi:orbit-compose", version.ref = "orbit" }
 orbit-core = { module = "org.orbit-mvi:orbit-core", version.ref = "orbit" }
 orbit-viewmodel = { module = "org.orbit-mvi:orbit-viewmodel", version.ref = "orbit" }
+html-text = { group = "de.charlex.compose", name = "html-text", version.ref = "charlex" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
